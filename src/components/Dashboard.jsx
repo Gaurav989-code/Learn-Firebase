@@ -13,6 +13,12 @@ const Dashboard = () => {
         <h3 style={{ paddingLeft: "30px" }}>
           <Link to={"/studentList"} style={{ color: "white", display: "block" }}>Student List</Link>
         </h3>
+        <h3 style={{ paddingLeft: "30px" }}>
+          <Link to={"/addFaculty"} style={{ color: "white", display: "block" }}>Add faculty</Link>
+        </h3>
+        <h3 style={{ paddingLeft: "30px" }}>
+          <Link to={"/facultyList"} style={{ color: "white", display: "block" }}>faculty List</Link>
+        </h3>
       </div>
       <div style={{ width: "80%", height: "100vh" }}>
         <Outlet />
