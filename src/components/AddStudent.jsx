@@ -1,4 +1,5 @@
 import { getDatabase, ref, set } from "firebase/database";
+//import { getDownloadURL, getStorage, ref as storageRef, uploadBytes } from "firebase/storage";
 import React, { useState } from "react";
 import { app } from "../firebase";
 import { useNavigate } from "react-router-dom";
@@ -9,13 +10,27 @@ const AddStudent = () => {
   const [studentId, setStudentId] = useState(null);
   const Navigate = useNavigate();
 
-  const SubmitHandler = (e) => {
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handelFileChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedFile(file);
+    console.log(file);
+  };
+
+  const SubmitHandler = async (e) => {
     e.preventDefault();
 
     const db = getDatabase(app);
+    // const storage = getStorage(app);
+    // const myRef = storageRef(storage, `images/${studentId}`);
+    // await uploadBytes(myRef, selectedFile);
+    // const imageUrl = await getDownloadURL(myRef);
+
     set(ref(db, "students/" + studentId), {
       studentName: name,
       phoneNumber: phone,
+      //imageUrl: imageUrl,
     })
       .then((res) => {
         Navigate("/studentList");
@@ -43,7 +58,8 @@ const AddStudent = () => {
           type="number"
           placeholder="phone number"
         />
-        <button type="submit">Submit</button>
+        {/* <input onChange={handelFileChange} type="file" />
+        <button type="submit">Submit</button> */}
       </form>
     </div>
   );

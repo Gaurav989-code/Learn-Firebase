@@ -1,4 +1,6 @@
 import { getDatabase, onValue, ref, remove } from "firebase/database";
+// import { getStorage, ref as storageRef, deleteObject } from "firebase/storage";
+
 import React, { useEffect, useState } from "react";
 import { app } from "../firebase";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +20,16 @@ const StudentList = () => {
 
   const deleteData = (key) =>{
     const db = getDatabase(app);
+    // const storage = getStorage(app);
+    // const myRef = storageRef(storage, "images/" + key);
     const studentRef = ref(db, "students/" + key);
+
+    // deleteObject(myRef).then(res => {
+    //   remove(studentRef);
+    // }).catch(err => {
+    //   console.log(err);
+    // })
+
     remove(studentRef);
   }
 
@@ -29,6 +40,7 @@ const StudentList = () => {
         <div>
           {Object.entries(studentsData).map(([key, value]) => (
             <div key={key}>
+              {/* <img style={{width: '60px'}} src={value.imageUrl}  /> */}
               <p>{value.studentName} : {value.phoneNumber}</p>
               <button onClick={() => deleteData(key)}>delete</button>
               <br />
